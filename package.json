@@ -1,0 +1,11 @@
+{
+  "name": "video-cast",
+  "version": "0.0.1",
+  "description": "raspvideocast app",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.2",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.3"
+  }
+}

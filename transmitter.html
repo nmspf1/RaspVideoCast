@@ -1,0 +1,73 @@
+
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; margin: 10px;}
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container" style="margin-top: 100px;">
+      <div class="alert alert-success" style="display:none;" role="alert">Success</div>
+
+
+      <p>transmitter</p>
+      <form class="form" >
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="input-group">
+              <input type="text" class="form-control" id="url" placeholder="Url...">
+
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-submit" type="button">Go!</button>
+              </span>
+            </div><!-- /input-group -->
+
+            <a href="#" class="play">Play</a><br>
+            <a href="#" class="pause">Pause</a><br>
+            <a href="#" class="forward">Forward</a><br>
+            <a href="#" class="backward">Backward</a>
+          </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+        
+      </form>
+
+    </div>
+
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      $('.btn-submit').click(function(){
+        socket.emit('toCast', $('#url').val());
+        $('.alert-success').fadeIn(700, function(){
+          setTimeout(function(){
+            $('.alert-success').fadeOut();
+          }, 1000);
+        });
+        $('#url').val('');
+      });
+
+      $('.play').click(function(){
+        socket.emit('playerCommand', 'play');
+      });
+      $('.pause').click(function(){
+        socket.emit('playerCommand', 'pause');
+      });
+      $('.forward').click(function(){
+        socket.emit('playerCommand', 'forward');
+      });
+      $('.backward').click(function(){
+        socket.emit('playerCommand', 'backward');
+      });
+    </script>
+  </body>
+</html>
